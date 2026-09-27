@@ -1,22 +1,61 @@
-@extends('layouts.app')
-
-@section('title', 'Daftar Buku')
-
-@section('content')
-    <h2>Daftar Buku</h2>
-
-    @if(count($books) > 0)
-        <ul>
-            @foreach($books as $index => $book)
-                <li>
-                    <strong>
-                        <a href="/books/{{ $index + 1 }}">{{ $book['title'] }}</a>
-                    </strong>
-                    - Penulis: {{ $book['author'] }} (Tahun: {{ $book['year'] }})
-                </li>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Buku</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Daftar Koleksi Buku</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Judul Buku</th>
+                <th>Penulis</th>
+                <th>Tahun Terbit</th>
+                <th>Stok</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($books as $book)
+            <tr>
+                <td>{{ $book->id }}</td>
+                <td>{{ $book->title }}</td>
+                <td>{{ $book->author }}</td>
+                <td>{{ $book->year }}</td>
+                <td>{{ $book->stock }}</td>
+            </tr>
             @endforeach
-        </ul>
-    @else
-        <p>Tiada buku yang tersedia.</p>
-    @endif
-@endsection
+        </tbody>
+    </table>
+</body>
+</html>
